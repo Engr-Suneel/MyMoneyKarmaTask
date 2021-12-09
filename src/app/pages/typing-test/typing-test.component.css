@@ -1,0 +1,63 @@
+.text-right {
+  text-align: right;
+}
+.font-size-12 {
+  font-size: 12px !important;
+}
+.typing-form {
+  padding: 10px 15px;
+}
+.custom-h4 {
+  margin: 0px;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #929292;  
+}
+.main-container {
+  padding: 10px 15px;
+}
+.custom-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 7px; 
+}
+.custom-progress .progress {
+  width: calc(100% - 50px);
+}
+.custom-paragraph {
+  font-size: 14px;
+  text-align: justify;
+  margin-top: 30px;  
+}
+.input-paragraph {
+  margin-top: 20px;
+  padding-bottom: 8px;
+}
+.input-paragraph textarea {
+  resize: none;
+}
+.test-result {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 10px; 
+}
+.ml-2 {
+  margin-left: 10px;
+}
+.total-score {
+  border: 1px solid #dddddd;
+  margin-top: 15px;
+  text-align: center;
+  border-radius: 2px;
+  padding: 5px 0px 20px;  
+}
+.total-score span {
+  font-size: 48px;
+  font-weight: bold;
+  color: #dc3545;
+}
+.total-score p {
+  margin: 0px;
+  font-size: 12px;
+}

@@ -1,0 +1,111 @@
+<section class="typing">
+  <div class="wrapper">
+    <div class="content">
+      <div class="row">
+        <div class="col-3">
+          <div class="card typing-form">
+            <h4 class="custom-h4">Choose your test</h4>
+            <form [formGroup]="typingTestForm" (ngSubmit)="ngSubmit()" class="mt-3">
+              <div class="form-group">
+                <label class="font-size-12">Duration</label>
+                <select class="form-control" formControlName="durationControl" (change)="onDurationChange()"
+                  [ngClass]="{ 'is-invalid': submitted && f.durationControl.errors }">
+                  <option *ngFor="let item of durationList" [value]="item.value">{{item.text}}</option>
+                </select>
+                <div *ngIf="submitted && f.durationControl.errors" class="invalid-feedback d-block font-size-12 m-0">
+                  <div *ngIf="f.durationControl.errors.required">Duration is required</div>
+                </div>
+              </div>
+
+              <div class="form-group" *ngIf="isCustomDuration">
+                <label class="font-size-12">Specify Duration in Minutes</label>
+                <input type="number" class="form-control" formControlName="customDurationControl"
+                  [ngClass]="{ 'is-invalid': submitted && f.customDurationControl?.errors }" />
+                <div *ngIf="submitted && f.customDurationControl?.errors"
+                  class="invalid-feedback d-block font-size-12 m-0">
+                  <div *ngIf="f.customDurationControl?.errors?.required">Please Specify Duration</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="font-size-12">Paragraph</label>
+                <select class="form-control" formControlName="paragraphControl"
+                  [ngClass]="{ 'is-invalid': submitted && f.paragraphControl.errors }">
+                  <option *ngFor="let item of paragraphList" [value]="item.id">{{item.text}}</option>
+                </select>
+                <div *ngIf="submitted && f.paragraphControl.errors" class="invalid-feedback d-block font-size-12 m-0">
+                  <div *ngIf="f.paragraphControl.errors.required">Paragraph is required</div>
+                </div>
+              </div>
+
+              <div class="text-right mt-3">
+                <button class="btn btn-primary font-size-12" [disabled]="isTestStarted">Start Test</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card p-3 mt-3" *ngIf="isTestStoped">
+            <table class="table table-sm table-bordered m-0">
+              <tbody>
+                <tr>
+                  <td><strong>Total Words</strong></td>
+                  <td class="text-right">{{totalActaulWords}}</td>
+                </tr>
+                <tr>
+                  <td><strong>Typed Words</strong></td>
+                  <td class="text-right">{{totalTypedWords}}</td>
+                </tr>
+                <tr>
+                  <td><strong>Correct Words Type</strong></td>
+                  <td class="text-right">{{totalCorrectWords}}</td>
+                </tr>
+                <tr>
+                  <td><strong>Incorrect Words Type</strong></td>
+                  <td class="text-right">{{totalIncorrectWords}}</td>
+                </tr>
+                <tr>
+                  <td><strong>Net Correct Words</strong></td>
+                  <td class="text-right">{{(totalCorrectWords - totalIncorrectWords)}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="total-score">
+              <span>{{score}}</span>
+              <p>Total Score %</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="main-container card" *ngIf="isTestStarted">
+
+            <div class="custom-progress">
+              <div class="progress">
+                <div class="progress-bar  {{progressColor}}" [ngStyle]="{'width': progress + '%'}" role="progressbar"
+                  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+              <div class="">
+                <span *ngIf="counter>0">{{counter | timerFormat}}</span>
+                <span *ngIf="counter<1">00:00</span>
+              </div>
+            </div>
+
+            <div class="custom-paragraph" *ngIf="selectedParagraph">
+              {{selectedParagraph?.paragraph}}
+            </div>
+
+            <div class="input-paragraph">
+              <textarea class="form-control" rows="10" [disabled]="isTestStoped" [(ngModel)]="userInput"
+                (paste)="onPaste($event)"></textarea>
+              <div class="text-right mt-3">
+                <button class="btn btn-success" *ngIf="!isTestStoped" (click)="stopTest()">Submit Test</button>
+                <button class="btn btn-secondary ml-2" *ngIf="isTestStoped" (click)="resetTest()">Reset Test</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

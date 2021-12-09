@@ -1,0 +1,40 @@
+<section class="app-sidebar" [ngClass]="{'app-sidebar-abs': isSideBarAbs == true}" (click)="hideMenu($event)">
+  <div class="app-sidebar-content" #AppSideBarContent (click)="preventMenu($event)">
+    <div class="app-sidebar-header">
+      <a href="javascript:;" class="logo-a" (click)="logoClick()">
+        <h4 class="m-0">My App</h4>
+      </a>
+      <a href="javascript:;" class="logo-icon-a" (click)="logoClick()">
+        <img src="assets/images/small-logo.png" class="logo-img-icon" />
+      </a>
+    </div>
+    <div class="app-sidebar-body">
+      <div class="sidebar-menu">
+        <ul class="menu">
+          <li *ngFor="let item of menuList">
+            <div class="no-sub-menu" *ngIf="item?.subItems == null || item?.subItems == undefined">
+              <a href="javascript:;" (click)="onMenuItemClick(item)" class="menu-a"
+                [ngClass]="{'active-nav': item.isActive}">
+                <i [class]="item.icon"></i> {{item.label}}
+              </a>
+            </div>
+            <div *ngIf="item?.subItems && item?.subItems?.length" class="has-sub-menu">
+              <a href="javascript:;" [ngClass]="{'active-nav': item.isActive, 'expand': item.isExpend}"
+                class="sub-menu-a" (click)="toggleSubMenu(item)">
+                <span> <i [class]="item.icon" class="custom-ic"></i> {{item.label}} </span>
+                <span> <i class="bi bi-caret-left m-0 ml-3 rotate" [ngClass]="{'down': item.isExpend}"></i> </span>
+              </a>
+              <div class="sub-menu-list" [ngClass]="{'sub-menu-list-show': item.isExpend}">
+                <div *ngFor="let sub of item?.subItems" (click)="onSubMenuItemClick(item, sub)" class="sub-menu-list-a">
+                  <a href="javascript:;" class="sub-menu" [ngClass]="{'active-sub-nav': sub.isActive}">
+                    <i class="bi bi-arrow-right-short"></i> {{sub.label}}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

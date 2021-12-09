@@ -1,0 +1,30 @@
+.typing-layout-wrapper {
+  display: flex;
+  position: relative;
+  height: 100vh;
+  z-index: 0;
+}
+.main-content {
+  width: calc(100% - 60px);
+  margin-left: 60px;
+}
+.page-content {
+  margin-top: 70px;
+  padding: 10px 20px;
+}
+
+@media (min-width: 768px) {
+
+}
+@media (min-width: 992px) {
+  .main-content {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+  }
+}
+@media (min-width: 1200px) {
+  .main-content {
+    width: calc(100% - 280px);
+    margin-left: 280px;
+  }
+}
